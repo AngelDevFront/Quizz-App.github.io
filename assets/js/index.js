@@ -1,3 +1,4 @@
+// Classe question avec comme contenu text qui va stocker le texte choices qui stocke un tableau des choix possible et answer qui stocke la réponse
 class Question {
   constructor(text, choices, answer) {
     this.text = text;
@@ -8,7 +9,7 @@ class Question {
     return choice === this.answer;
   }
 }
-
+// création des tableau question avec la question les choix de reponse et la réponse correcte
 const questions = [
   new Question(
     "Quelle méthode Javascript permet de filtrer les éléments d'un tableau",
@@ -31,27 +32,27 @@ const questions = [
     "Math.round()"
   ),
 ];
-
+// Crée une class quiz baser sur un ensembles de question
 class Quiz {
-  constructor(questions) {
+  constructor(questions) {// initialise un nouvau avec un score initiale de 0
     this.score = 0;
     this.questions = questions;
     this.currentQuestionIndex = 0;
   }
-  getCurrentQuestion() {
+  getCurrentQuestion() { // Envoie la question a laquelle l'utilisateur doit répondre
     return this.questions[this.currentQuestionIndex];
   }
   guess(answer) {
-    if (this.getCurrentQuestion().isCorrectAnswer(answer)) {
+    if (this.getCurrentQuestion().isCorrectAnswer(answer)) { // vérifie si la reponse donnée est corect si oui le score est augmente 
       this.score++;
     }
-    this.currentQuestionIndex++;
+    this.currentQuestionIndex++; //ensuite passe a la question suivante
   }
-  hasEnded() {
+  hasEnded() { // Vérifie si le quiz est terminer en comparant l'index de la question actuelle avec la longueur totale du tableau des question si supérieur ou egal alors ses que le quiz est erminer
     return this.currentQuestionIndex >= this.questions.length;
   }
 }
-// Quiz display
+// Quiz display affiche le quiz dans l'interface utilisateur
 const display = {
   elementShown: function (id, text) {
     let element = document.getElementById(id);
@@ -101,6 +102,6 @@ quizApp = () => {
   }
 };
 
-// Create Quiz
+// Create Quiz crée le quiz
 let quiz = new Quiz(questions);
 quizApp();
